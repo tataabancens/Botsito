@@ -16,6 +16,6 @@ def fillForm(driver, data):
     submit.click()
 
     WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, "vHW8K")))
-
+    print("Hello")
     another_response = driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div[1]/div/div[4]/a')
     another_response.click()
