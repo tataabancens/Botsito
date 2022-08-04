@@ -1,16 +1,20 @@
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def fillForm(driver, data):
+def fillForm(driver, row):
     WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, "M7eMe")))
     inputs = driver.find_elements(By.CLASS_NAME, "whsOnd.zHQkBf")
     
     for i in range(len(inputs)):
         inputs[i].clear()
-        inputs[i].send_keys(data[i])
+        if isinstance(row[i], datetime):
+            inputs[i].send_keys(row[i].strftime("%m/%d/%Y"))
+            continue
+        inputs[i].send_keys(row[i])
 
     submit = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div/span/span')
     submit.click()
